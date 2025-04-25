@@ -1,7 +1,7 @@
 # Flux
 AI based AO tool calling on steroids that integrates with your existing tools and editor using a MCP server.
 
-![Video demo](/src/media/fluxp4.mp4)
+https://github.com/user-attachments/assets/3484e2db-e7cb-479a-84a2-0b399e1149ac
 
 ## Features Implemented
 - Run AO code using just natural language
@@ -37,7 +37,7 @@ There are currently two ways to install and use Flux, right now it has been test
         }
         ```
     - if you did everything correctly you will be able to see the flux MCP loaded with all the tools, and its ready to be used in Cursor!
-        ![Flux MCP loaded in Cursor](/src/screenshots/mcp-added.png)
+        ![Flux MCP loaded in Cursor](/src/media/mcp-added.png)
 
 2. Remote Setup - For users who want to use Flux without installing anything locally
     - Open Cursor and go to **Settings** > **Cursor Settings** > **MCP** > **Add new MCP tool**
@@ -50,7 +50,7 @@ There are currently two ways to install and use Flux, right now it has been test
         }
         ```
     - if you did everything correctly you will be able to see the flux MCP loaded with all the tools, and its ready to be used in Cursor!
-        ![Flux MCP loaded in Cursor](/src/screenshots/mcp-added.png)
+        ![Flux MCP loaded in Cursor](/src/media/mcp-added.png)
 
 ## Usage
 We would suggest you add the [`llms.txt`](https://cookbook_ao.g8way.io/llms-full.txt) for AO docs in cursor first and use it as a context before you start using the MCP server. If you don't know how to do it, checkoout [this documentation](https://docs.cursor.com/context/@-symbols/@-docs) on how to add docs to cursor.
