@@ -7,6 +7,8 @@ services:
     envVars:
       - key: NODE_ENV
         value: production
+      - key: PORT
+        value: "10000"
     autoDeploy: true
-    healthCheckPath: /
+    healthCheckPath: /health
     plan: free 

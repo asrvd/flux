@@ -15,6 +15,14 @@ app.use(cors());
 
 let transport: SSEServerTransport;
 
+// Root route handler
+app.get("/", (_req: Request, res: Response) => {
+  res.json({
+    message: "Welcome to Flux API",
+    status: "running",
+  });
+});
+
 app.get("/sse", async (_req: Request, res: Response) => {
   transport = new SSEServerTransport("/message", res);
   await server.connect(transport);
@@ -36,5 +44,5 @@ app.get("/health", (_req: Request, res: Response) => {
 
 // Start server
 app.listen(PORT, () => {
-  console.log(`🚀 Flux server running on http://localhost:${PORT}`);
+  console.log(`🚀 Flux server running on port ${PORT}`);
 });
