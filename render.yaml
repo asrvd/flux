@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: flux
+    env: node
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+    autoDeploy: true
+    healthCheckPath: /
+    plan: free 
