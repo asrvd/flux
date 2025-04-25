@@ -1,50 +1,86 @@
-# Express TypeScript API
+# Flux
+AI based AO tool calling on steroids that integrates with your existing tools and editor using a MCP server.
 
-A simple Express API built with TypeScript and PNPM.
+![Video demo](/src/media/fluxp4.mp4)
 
-## Setup
+## Features Implemented
+- Run AO code using just natural language
+- Create and run custom AO code/blueprints completely using natural language
+- Integrates with your existing AI dev tools like Cursor, Windsurf, Claude, and anything that supports MCP tool calling
+- Can test out all the code it pushes to an process
+- Can create and test complex handlers
 
-1. Install dependencies:
-```bash
-pnpm install
+## Features to be implemented
+- Inetgration with AO ecosystem tools
+- Better code generation capabilities by adding more context about AO
+
+## Tech stack
+- AO
+- Arweave
+- MCP typescript sdk
+- Typescript
+- Node.js
+
+## Installation
+There are currently two ways to install and use Flux, right now it has been tested significantly only on Cursor so we will be showing how to install FLux in Cursor -
+
+1. Local Setup - For users who want everything to be present locally, no remote servers involved
+    - Make sure you have latest stable version of NODE.js installed - [Node.js download](https://nodejs.org/en/download/)
+    - Copy the content of the file [local/index.js](src/local/index.js) to your local machine in any folder and copy the absolute path
+    - Open Cursor and go to **Settings** > **Cursor Settings** > **MCP** > **Add new MCP tool**
+    - Paste this code in the file 
+        ```json
+        "mcpServers": {
+            "flux": {
+                "command": "node /path/to/your/local/index.js",
+            }
+        }
+        ```
+    - if you did everything correctly you will be able to see the flux MCP loaded with all the tools, and its ready to be used in Cursor!
+        ![Flux MCP loaded in Cursor](/src/screenshots/mcp-added.png)
+
+2. Remote Setup - For users who want to use Flux without installing anything locally
+    - Open Cursor and go to **Settings** > **Cursor Settings** > **MCP** > **Add new MCP tool**
+    - Paste this code in the file 
+        ```json
+        "mcpServers": {
+            "flux": {
+                "url": "https://flux-2esw.onrender.com/sse",
+            }
+        }
+        ```
+    - if you did everything correctly you will be able to see the flux MCP loaded with all the tools, and its ready to be used in Cursor!
+        ![Flux MCP loaded in Cursor](/src/screenshots/mcp-added.png)
+
+## Usage
+We would suggest you add the [`llms.txt`](https://cookbook_ao.g8way.io/llms-full.txt) for AO docs in cursor first and use it as a context before you start using the MCP server. If you don't know how to do it, checkoout [this documentation](https://docs.cursor.com/context/@-symbols/@-docs) on how to add docs to cursor.
+
+The more context you give to cursor, the more acurate the responses will be.
+
+Now add these custom rules in your Cursor project to make sure Cursor doesn't hallucinate or give wrong responses. You can add these rules in the **Settings** > **Cursor Settings** > **Rules** > **Add new rule**.
+
+```txt
+For adding json capabilities ONLY IF NEEDED, you need to add a line "local json = require("json")" on top of file. BUT DONT USE IT UNLESS NEEDED. SIMPLE THINGS CAN BE DONE USING AO PROCESS STATE
+
+Always use Send instead of msg.reply
+
+Always make sure a handler is sending out a response/reply (using Send) and send it as data as well instaed of just returning using tags
+
+Never add any tags by yourself, always add tags when needed or instructed by user, also {"Action":"Eval"} tag is for running lua in an ao process and {"Action" : "action_name"} is for running a handler
+
+Never add the "Type" tag to anything, thats reserved for internal ao specifications
+
+Always use Handler.utils whever possible when creating a handler, for example --
+    Handlers.add(
+        "pingpong",
+        Handlers.utils.hasMatchingTag("Action", "Ping"),
+        function (msg) 
+            Handlers.utils.reply("Pong")(msg) -- or use Send() here
+        end
+    )
 ```
 
-2. Create a `.env` file in the root directory:
-```bash
-PORT=3000
-```
+Now you can start using the Flux MCP server in Cursor Agents.
 
-## Development
-
-Run the development server:
-```bash
-pnpm dev
-```
-
-## Build
-
-Build the application:
-```bash
-pnpm build
-```
-
-## Production
-
-Start the production server:
-```bash
-pnpm start
-```
-
-## Available Endpoints
-
-- `GET /`: Welcome message
-- `GET /health`: Health check endpoint
-
-## Technologies Used
-
-- Express.js
-- TypeScript
-- PNPM
-- tsup (for building)
-- dotenv
-- cors 
+## Support
+If you find any issues with the Server or encounter any bugs, please let us know by opening an issue or mailing us @ flux.mcp@gamil.com
