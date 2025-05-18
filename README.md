@@ -83,4 +83,4 @@ Always use Handler.utils whever possible when creating a handler, for example --
 Now you can start using the Flux MCP server in Cursor Agents.
 
 ## Support
-If you find any issues with the Server or encounter any bugs, please let us know by opening an issue or mailing us @ flux.mcp@gamil.com
+If you find any issues with the Server or encounter any bugs, please let us know by opening an issue or mailing us @ flux.mcp@gmail.com
