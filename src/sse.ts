@@ -30,5 +30,13 @@ export function createSSEServer(mcpServer: McpServer) {
     }
   });
 
+  app.get("/", (req, res) => {
+    res.send("Hello World from Flux!");
+  });
+
+  app.get("/health", (req, res) => {
+    res.send("OK");
+  });
+
   return app;
 }
