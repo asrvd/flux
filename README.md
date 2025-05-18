@@ -49,7 +49,7 @@ There are currently two ways to install and use Flux, right now it has been test
             }
         }
         ```
-    - if you did everything correctly you will be able to see the flux MCP loaded with all the tools, and its ready to be used in Cursor!
+    - if you did everything correctly you will be able to see the flux MCP loaded with all the tools, and its ready to be used in Cursor (PS: You might have to reload the MCP multiple times or restart Cursor)!
         ![Flux MCP loaded in Cursor](/src/media/mcp-added.png)
 
 ## Usage
