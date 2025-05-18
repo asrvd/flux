@@ -1,3 +1,4 @@
+import "dotenv/config";
 import FluxServer from "./mcp.js";
 import { createSSEServer } from "./sse.js";
 
