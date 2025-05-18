@@ -18,31 +18,24 @@ function cleanOutput(result: any): string {
     .replace(/\\n/g, "\n");
 }
 
-// Create an MCP server
-const server = new McpServer({
-  name: "ao-mcp",
-  version: "1.0.0",
-});
+async function createServer() {
+  // Create an MCP server
+  const server = new McpServer({
+    name: "flux",
+    version: "1.0.0",
+  });
 
-const arweave = Arweave.init({
-  host: "arweave.net",
-  port: 443,
-  protocol: "https",
-});
+  const arweave = Arweave.init({
+    host: "arweave.net",
+    port: 443,
+    protocol: "https",
+  });
 
-let wallet = null;
-let signer: ReturnType<typeof createSigner> | undefined;
+  // Generate wallet and create signer
+  const wallet = await arweave.wallets.generate();
+  const signer = createSigner(wallet);
 
-// Initialize wallet and signer before setting up tools
-async function initializeWallet() {
-  wallet = await arweave.wallets.generate();
-  signer = createSigner(wallet);
-}
-
-// Initialize everything
-async function initialize() {
-  await initializeWallet();
-
+  // Register all tools before starting the server
   server.tool(
     "spawn",
     {
@@ -240,10 +233,9 @@ async function initialize() {
       };
     }
   );
+
+  return server;
 }
 
-// Start the initialization
-initialize().catch(console.error);
-
-// Export the server
-export default server;
+// Export the createServer function
+export default createServer;

@@ -2,7 +2,7 @@ import express, { Request, Response } from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import { SSEServerTransport } from "@modelcontextprotocol/sdk/server/sse.js";
-import server from "./server";
+import createServer from "./server";
 
 // Load environment variables
 dotenv.config();
@@ -14,6 +14,15 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 
 let transport: SSEServerTransport;
+let server: Awaited<ReturnType<typeof createServer>>;
+
+// Initialize server
+async function initServer() {
+  server = await createServer();
+}
+
+// Initialize server on startup
+initServer().catch(console.error);
 
 // Root route handler
 app.get("/", (_req: Request, res: Response) => {
@@ -24,6 +33,10 @@ app.get("/", (_req: Request, res: Response) => {
 });
 
 app.get("/sse", async (_req: Request, res: Response) => {
+  if (!server) {
+    res.status(503).json({ error: "Server not initialized" });
+    return;
+  }
   transport = new SSEServerTransport("/message", res);
   await server.connect(transport);
 });
