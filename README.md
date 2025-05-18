@@ -26,17 +26,17 @@ There are currently two ways to install and use Flux, right now it has been test
 
 1. Local Setup - For users who want everything to be present locally, no remote servers involved
     - Make sure you have latest stable version of NODE.js installed - [Node.js download](https://nodejs.org/en/download/)
-    - Copy the content of the file [local/index.js](src/local/index.js) to your local machine in any folder and copy the absolute path
     - Open Cursor and go to **Settings** > **Cursor Settings** > **MCP** > **Add new MCP tool**
     - Paste this code in the file 
         ```json
         "mcpServers": {
             "flux": {
-                "command": "node /path/to/your/local/index.js",
+                "command": "npx",
+                "args": ["-y", "flux-ao@latest"],
             }
         }
         ```
-    - if you did everything correctly you will be able to see the flux MCP loaded with all the tools, and its ready to be used in Cursor!
+    - if you did everything correctly you will be able to see the flux MCP loaded with all the tools, and its ready to be used in Cursor (PS: You might have to reload the MCP multiple times or restart Cursor)!
         ![Flux MCP loaded in Cursor](/src/media/mcp-added.png)
 
 2. Remote Setup - For users who want to use Flux without installing anything locally
